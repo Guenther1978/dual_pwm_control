@@ -51,5 +51,27 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# ignore output of gpasm
-PIC*
+# Temporary files created by Emacs and Vim
+*~
+*#
+*.swp
+*!
+
+# Ignore build files
+*/build/*
+*/xml/*
+
+# Ignore files created by asm4doxy
+*-inc.c*
+*-asm.c*
+
+# Ignore created files by gpasm
+*.lst
+*.cod
+
+# Ignore files created by MPLAB
+*.err
+*.cof
+*.mcp
+*.mcs
+*.mcw
