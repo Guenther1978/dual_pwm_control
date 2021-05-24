@@ -21,7 +21,7 @@ fl.write("\torg 0x1FF\n")
 fl.write("table_low:\n")
 fl.write("\tmovwf\tPCL")
 
-for row in range(15):
+for row in range(16):
     fh.write("\n\t dt ")
     fl.write("\n\t dt ")
     for column in range(16):

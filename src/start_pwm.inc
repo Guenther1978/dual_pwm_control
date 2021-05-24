@@ -8,7 +8,8 @@
 
 start_pwm:
         bsf     STATUS, RP0
-        bcf     TRISB, LED
+        bcf     TRISB, LED_WW
+        bcf     TRISB, LED_CW
         bcf     STATUS, RP0
         clrf    PIR1
     

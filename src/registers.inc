@@ -18,13 +18,13 @@ pointer_ww          ; 0x2b
 pointer_cw          ; 0x2c
 pointer_sub_high    ; 0x2d
 pointer_sub_low     ; 0x2e
-sCcounter           ; 0x22
-sCduration          ; 0x23
-sCflag              ; 0x24
-RandHi              ; 0x25
-RandLo              ; 0x26
-received_byte       ; 0x27
-pointer_min         ; 0x2a
-pointer_max         ; 0x2b
-offset              ; 
+sCcounter           ; 0x2f
+sCduration          ; 0x30
+sCflag              ; 0x31
+RandHi              ; 0x32
+RandLo              ; 0x33
+received_byte       ; 0x34
+pointer_min         ; 0x35
+pointer_max         ; 0x36
+offset              ; 0x37
         endc

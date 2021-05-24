@@ -15,9 +15,21 @@
 
         org 4
 
+#include "isr_caller.inc"
+#include "isr_uart.inc"
 #include "isr_timer1.inc"
-#include "change_intensity.inc"	
-#include "load_data.inc"
+#include "stop_pwm.inc"
+#include "change_pointer.inc"
+#include "load_intensity.inc"
+#include "send_intensity.inc"
+#include "start_pwm.inc"
+#include "random16.inc"
+#include "speed_control.inc"
+#include "new_duration.inc"
+#include "new_min_pointer.inc"
+#include "new_max_pointer.inc"
+#include "uart.inc"
+
 
         ;; 
         ; @brief This program controls warm white and cold white led stripes.
@@ -29,21 +41,19 @@ wwcw_control:
         bcf       STATUS,RP0          ; Ensure ISR executes in Register Bank 0
         bcf       STATUS,RP1
 
-        ;; Configure and Start timer 2
-        bsf     STATUS, RP0
-        movlw   0xFF
-        movwf   PR2
-        bcf     PIE1, TMR2IE
-        bcf     STATUS, RP0
-        bsf     T2CON, TMR2ON
+        #include "timer1Config.inc"
+        #include "timer2Config.inc"
+        call    random_init
+        call    uart_init        
 
-        ;; Configure and start timer 1
-        bsf     T1CON, T1CKPS1
-        bsf     T1CON, T1CKPS0
-        bsf     STATUS, RP0
-        bsf     PIE1, TMR1IE
-        bcf     STATUS, RP0
-        bsf     T1CON, TMR1ON
+        clrf    darker
+        clrf    pointer
+        clrf    intensity_high
+        clrf    intensity_low
+        movlw   MAX
+        movwf   pointer_max
+        movlw   1
+        movwf   pointer_min
 	
         ;; enabling PWM mode
 	clrf	CCP1CON

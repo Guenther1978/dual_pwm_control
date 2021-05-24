@@ -9,9 +9,11 @@
 
 stop_pwm:
         bsf     STATUS, RP0
-        bsf     TRISB, LED
+        bsf     TRISB, LED_WW
+        bsf     TRISB, LED_CW
         bcf     STATUS, RP0
         clrf    CCP1CON
+        clrf    CCP2CON
 
         return
 
