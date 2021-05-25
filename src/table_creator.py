@@ -6,7 +6,7 @@
 import math
 
 number = 1
-size = 240
+size = 256
 max_value = 1023
 expo = math.log(max_value)/(size - 1)
 sin_arg = math.pi / (2 * size)
@@ -17,7 +17,7 @@ fh.write("table_high:\n")
 fh.write("\tmovwf\tPCL")
 
 fl = open("intensities_low.inc", "w")
-fl.write("\torg 0x1FF\n")
+fl.write("\torg 0x400\n")
 fl.write("table_low:\n")
 fl.write("\tmovwf\tPCL")
 
