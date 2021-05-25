@@ -15,6 +15,8 @@ start_pwm:
     
         bsf CCP1CON,CCP1M3
         bsf CCP1CON,CCP1M2
+        bsf CCP2CON,CCP1M3
+        bsf CCP2CON,CCP1M2
     
         bsf     T2CON, TMR2ON
 PWM_Period_Match:

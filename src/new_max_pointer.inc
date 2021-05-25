@@ -18,6 +18,10 @@ new_max_pointer:
         btfsc   STATUS, C
         goto    return_new_max_pointer
         movwf   pointer_max
+        comf    pointer_max, W
+        btfsc   STATUS, Z
+        decf    pointer_max, f
+        decf    pointer_max, f
 return_new_max_pointer:
         return
 

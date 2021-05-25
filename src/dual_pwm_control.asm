@@ -54,6 +54,9 @@ wwcw_control:
         movwf   pointer_max
         movlw   1
         movwf   pointer_min
+        movlw   0x07
+        movwf   sCduration
+        movwf   sCcounter
 	
         ;; enabling PWM mode
 	clrf	CCP1CON
@@ -75,8 +78,10 @@ wwcw_control:
         movwf   darker
         movlw   MAX
         movwf   pointer_ww
-        movlw   0x00
-        clrf    pointer_cw        
+        movwf   pointer_max
+        movlw   MIN
+        movwf   pointer_cw
+        movwf   pointer_min      
 
         ;; Enable global interrupts
         bsf     INTCON, GIE

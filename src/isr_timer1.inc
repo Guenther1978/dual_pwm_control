@@ -14,24 +14,34 @@ isr_timer_1:
         goto    exit_isr_timer_1
         
         call    stop_pwm
-        call    change_pointer
+        movlw   LED_WW
+        movwf   led
         movf    pointer_ww, W
         movwf   pointer
+        call    change_pointer
+        movf    pointer, W
+        movwf   pointer_ww
         call    load_intensity
         movf    intensity_high, W
         movwf   intensity_ww_high
         movf    intensity_low, W
         movwf   intensity_ww_low
+
+        movlw   LED_CW
+        movwf   led
         movf    pointer_cw, W
         movwf   pointer
+        call    change_pointer
+        movf    pointer, W
+        movwf   pointer_cw
         call    load_intensity
         movf    intensity_high, W
         movwf   intensity_cw_high
         movf    intensity_low, W
         movwf   intensity_cw_low
+
         call    send_intensity
         call    start_pwm
-        call    uart_test
 
 exit_isr_timer_1:
         bcf     PIR1, TMR1IF

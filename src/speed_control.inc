@@ -18,7 +18,6 @@ speed_control:
         goto    return_from_speed_control
         movf    sCduration, W
         movwf   sCcounter
-        movlw   0xFF
-        movwf   sCflag
+        bsf     sCflag, LED_WW
 return_from_speed_control:
         return

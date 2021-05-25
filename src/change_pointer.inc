@@ -2,26 +2,38 @@
 ; change_pointer
 ;;
 change_pointer:
+        movf    led, w
+        andlw   LED_WW
+        btfsc   STATUS, Z
+        goto    change_led_cw
         movf    darker, w
         andwf   led, w
         btfss   STATUS, Z
         goto    dim_led 
-        incf    pointer_ww, f
-        movlw   MAX
-        subwf   pointer_ww, w
-        btfss   STATUS, Z
-        goto    change_intensity_return
+        incf    pointer, f
+        incf    pointer, w
+        subwf   pointer_max, w
+        btfsc   STATUS, C
+        goto    return_change_pointer
         movf    led, w
         iorwf   darker, f
-        goto    change_intensity_return
+        call    new_duration
+        call    new_min_pointer
+        goto    return_change_pointer
 dim_led:
-        decf    pointer_ww, f
+        decf    pointer, f
+        decf    pointer, w
+        subwf   pointer_min, w
         btfss   STATUS, Z
-        goto    change_intensity_return
+        goto    return_change_pointer
         comf    led, w
         andwf   darker, f
-change_intensity_return:
-        movf    pointer_ww, w
-        subwf   SIZE / 2
-        movwf   pointer_cw
+        call    new_duration
+        call    new_max_pointer
+        goto    return_change_pointer
+change_led_cw:
+        movf    pointer_ww, w   
+        sublw   MAX
+        movwf   pointer
+return_change_pointer:
         return
